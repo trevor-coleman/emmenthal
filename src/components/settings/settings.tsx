@@ -17,6 +17,7 @@ import {
 } from 'date-fns';
 import { DateRangePicker } from './date-range-picker';
 import { useCalendarOptions } from '../calendar-provider';
+import { DaysOfTheWeek } from './days-of-the-week';
 
 export function Settings() {
   const { options, setOptions } = useCalendarOptions();
@@ -87,6 +88,7 @@ export function Settings() {
           renderInput={(params) => <TextField {...params} />}
         />
       </Stack>
+      <DaysOfTheWeek />
     </Stack>
   );
 }

@@ -20,7 +20,7 @@ interface ICalendarProviderProps {}
 
 type CalendarProviderProps = PropsWithChildren<ICalendarProviderProps>;
 
-interface ICalendarOptions {
+export interface ICalendarOptions {
   date: {
     customDate?: Date | number | null;
     range: number | null;
@@ -61,42 +61,43 @@ const blankContext: ICalendarContextData = {
 };
 
 function init(): ICalendarContextData {
-  return blankContext;
-  // if (typeof window === 'undefined') return blankContext;
-  //
-  // const storedContext = localStorage.getItem('contextValue');
-  //
-  // const initialContext = storedContext ? JSON.parse(storedContext) : {};
-  //
-  // const {date = {}, time = {}} = initialContext.options ?? {};
-  //
-  // return {
-  //   ...blankContext,
-  //   ...initialContext,
-  //   options: {
-  //     ...initialContext.options,
-  //     date: date
-  //       ? {
-  //         ...date,
-  //         customDate: startOfDay(date.customDate)
-  //           ? startOfDay(new Date(date.customDate))
-  //           : null,
-  //       }
-  //       : {
-  //         date: {
-  //           ...blankContext.options.date,
-  //         },
-  //       },
-  //     time: time
-  //       ? {
-  //         start: new Date(time.start),
-  //         end: new Date(time.end),
-  //       }
-  //       : {
-  //         ...blankContext.options.time,
-  //       },
-  //   },
-  // };
+  // return blankContext;
+  if (typeof window === 'undefined') return blankContext;
+
+  const storedContext = localStorage.getItem('contextValue');
+
+  const initialContext = storedContext ? JSON.parse(storedContext) : {};
+
+  const { date = {}, time = {} } = initialContext.options ?? {};
+
+  return {
+    ...blankContext,
+    //   ...initialContext,
+    //   options: {
+    //     ...initialContext.options,
+    //     date: date
+    //       ? {
+    //           ...date,
+    //           customDate: startOfDay(date.customDate)
+    //             ? startOfDay(new Date(date.customDate))
+    //             : null,
+    //         }
+    //       : {
+    //           date: {
+    //             ...blankContext.options.date,
+    //           },
+    //         },
+    //     time: time
+    //       ? {
+    //           start: new Date(time.start),
+    //           end: new Date(time.end),
+    //         }
+    //       : {
+    //           ...blankContext.options.time,
+    //         },
+    //   },
+    // };
+  };
 }
 
 interface ICalendarContext extends ICalendarContextData {
@@ -170,8 +171,6 @@ export const CalendarProvider: FunctionComponent<CalendarProviderProps> = ({
     selectedCalendars,
     toggleSelected: toggleCheck,
   };
-
-  console.log(contextValue);
 
   if (typeof window !== 'undefined') {
     localStorage.setItem('contextValue', JSON.stringify(contextValue));

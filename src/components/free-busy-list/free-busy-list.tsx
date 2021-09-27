@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, List, Typography } from '@mui/material';
+import { Box, Button, List, Typography } from '@mui/material';
 import { useCalendarContext } from '../calendar-provider';
 import { TimePeriodListItem } from '../time-period-list-item';
 import { findFreeTime } from '../../api-calls/free-time-finder';
@@ -22,7 +22,7 @@ function shouldShowDivider(interval: Interval, index: number) {
 export const FreeBusyList = () => {
   const { freeBusyData, selectedCalendars, options } = useCalendarContext();
 
-  const freeTime = findFreeTime(freeBusyData, selectedCalendars, options.time);
+  const freeTime = findFreeTime(freeBusyData, selectedCalendars, options);
   const freeTimeText = formatFreeTimeText(freeTime);
   //TODO: Make find free time work with ranges
   /**
@@ -33,7 +33,13 @@ export const FreeBusyList = () => {
     <Box sx={{ width: '100%' }}>
       <Typography variant={'h6'}>Free Times</Typography>
       <CopyToClipboard text={freeTimeText}>
-        <button>Copy to clipboard with button</button>
+        <Button
+          disabled={freeTime.length === 0}
+          variant={'contained'}
+          color={'secondary'}
+        >
+          Copy as Plain Text
+        </Button>
       </CopyToClipboard>
       <List>
         {freeTime.map((interval, index) => {

@@ -26,8 +26,6 @@ const Home: NextPage = ({ authUrl, authenticated }: any) => {
   const { calendars, freeBusyData } = useCalendarContext();
   const router = useRouter();
 
-  console.log('HELLO', freeBusyData);
-
   return (
     <Container>
       <Header authUrl={authUrl} />
@@ -52,8 +50,6 @@ export async function getServerSideProps(context: NextPageContext) {
   const { req, res } = context;
 
   const { auth, authenticated, token } = await authenticate(req, res);
-
-  console.log(getAuthUrl());
 
   if (token) {
     const cookies = new Cookies(req!, res!);

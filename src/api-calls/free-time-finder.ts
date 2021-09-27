@@ -1,5 +1,8 @@
 import { calendar_v3 } from 'googleapis';
-import { FreeBusyData } from '../components/calendar-provider';
+import {
+  FreeBusyData,
+  ICalendarOptions,
+} from '../components/calendar-provider';
 import {
   isBefore,
   isAfter,
@@ -19,10 +22,7 @@ import freeBusy from '../../pages/api/free-busy';
 export function findFreeTime(
   freeBusyData: FreeBusyData,
   selectedCalendars: string[],
-  timeRange: {
-    start: Date | number | null;
-    end: Date | number | null;
-  }
+  { time: timeRange, date: { days: weekdays } }: ICalendarOptions
 ): Interval[] {
   const range: Interval = {
     start: timeRange?.start ?? set(new Date(), { hours: 10, minutes: 0 }),
@@ -84,8 +84,9 @@ export function findFreeTime(
       free.end = free.start;
     }
 
-    if (isAfter(start, day.end)) {
-      start = day.end;
+    if (!weekdays.includes(getDay(start))) {
+      busy = queue.shift()!;
+      continue;
     }
 
     if (start <= free.end) {

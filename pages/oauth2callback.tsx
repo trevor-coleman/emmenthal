@@ -69,8 +69,6 @@ export async function getServerSideProps(context: NextPageContext) {
 
   const props = { token: token, success };
 
-  console.log(props);
-
   return {
     props, // will be passed to the page component as props
   };
