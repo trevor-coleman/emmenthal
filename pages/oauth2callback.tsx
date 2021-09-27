@@ -19,6 +19,8 @@ export default function Oauth2callback({
 }) {
   const router = useRouter();
 
+  console.log(success, token);
+
   if (success && typeof window !== 'undefined') {
     router.push('/');
   }
@@ -41,21 +43,17 @@ export async function getServerSideProps(context: NextPageContext) {
 
   const code: string = (query.code ?? '') as string;
 
-  if (!code)
-    return {
-      props: {
-        code: '',
-        token: {},
-      },
-    };
+  console.log('code');
 
   let token: Credentials | null;
   let success: boolean = false;
 
   try {
     token = await getToken(auth, code);
+    console.log(token);
     success = true;
   } catch (e) {
+    console.error(e);
     token = null;
   }
 
@@ -68,6 +66,8 @@ export async function getServerSideProps(context: NextPageContext) {
   }
 
   const props = { token: token, success };
+
+  console.log(props);
 
   return {
     props, // will be passed to the page component as props
