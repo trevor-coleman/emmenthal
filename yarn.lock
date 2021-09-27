@@ -947,6 +947,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-copy-to-clipboard@npm:^5":
+  version: 5.0.1
+  resolution: "@types/react-copy-to-clipboard@npm:5.0.1"
+  dependencies:
+    "@types/react": "*"
+  checksum: 5b8252fc455191da6b236592c77cce5d2f3c0e123928e0c8dc3c39e450f0b28743dc88e3927ba0957fefd0b248dcf6feb18f6fe8a370bd8f0e3a5bb9d046e0f3
+  languageName: node
+  linkType: hard
+
 "@types/react-datepicker@npm:^4":
   version: 4.1.7
   resolution: "@types/react-datepicker@npm:4.1.7"
@@ -1909,6 +1918,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"copy-to-clipboard@npm:^3":
+  version: 3.3.1
+  resolution: "copy-to-clipboard@npm:3.3.1"
+  dependencies:
+    toggle-selection: ^1.0.6
+  checksum: 3c7b1c333dc6a4b2e9905f52e4df6bbd34ff9f9c97ecd3ca55378a6bc1c191bb12a3252e6289c7b436e9188cff0360d393c0161626851d2301607860bbbdcfd5
+  languageName: node
+  linkType: hard
+
 "core-js-pure@npm:^3.16.0":
   version: 3.18.0
   resolution: "core-js-pure@npm:3.18.0"
@@ -2258,6 +2276,7 @@ __metadata:
     "@types/eslint": ^7
     "@types/prettier": ^2
     "@types/react": 17.0.21
+    "@types/react-copy-to-clipboard": ^5
     "@types/react-datepicker": ^4
     "@types/react-dom": ^17
     axios: ^0.21.4
@@ -2273,6 +2292,7 @@ __metadata:
     prettier: ^2.4.1
     react: 17.0.2
     react-cookie: ^4.1.1
+    react-copy-to-clipboard: ^5.0.4
     react-datepicker: ^4.2.1
     react-dom: 17.0.2
     typescript: 4.4.3
@@ -4826,7 +4846,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:^15.5.8, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -4959,6 +4979,18 @@ fsevents@~2.3.1:
   peerDependencies:
     react: ">= 16.3.0"
   checksum: b734dcad35d790ced8c8fc3b19e3eb1f546e0923c637bad888c7c0096dbe2c996668416a49b48827ec7ad2d81522f1b57567694c791e1a5fb89ca41b39158a74
+  languageName: node
+  linkType: hard
+
+"react-copy-to-clipboard@npm:^5.0.4":
+  version: 5.0.4
+  resolution: "react-copy-to-clipboard@npm:5.0.4"
+  dependencies:
+    copy-to-clipboard: ^3
+    prop-types: ^15.5.8
+  peerDependencies:
+    react: ^15.3.0 || ^16.0.0 || ^17.0.0
+  checksum: dae8caae192d4937a151ec3ddad540fe4846d28646aee6d90774abcc6a077761926c99f2bcd9506a76a65524ec2c32b5ec1341e8096fcd3f6335365eaf065137
   languageName: node
   linkType: hard
 
@@ -5899,6 +5931,13 @@ resolve@^2.0.0-next.3:
   dependencies:
     is-number: ^7.0.0
   checksum: f76fa01b3d5be85db6a2a143e24df9f60dd047d151062d0ba3df62953f2f697b16fe5dad9b0ac6191c7efc7b1d9dcaa4b768174b7b29da89d4428e64bc0a20ed
+  languageName: node
+  linkType: hard
+
+"toggle-selection@npm:^1.0.6":
+  version: 1.0.6
+  resolution: "toggle-selection@npm:1.0.6"
+  checksum: a90dc80ed1e7b18db8f4e16e86a5574f87632dc729cfc07d9ea3ced50021ad42bb4e08f22c0913e0b98e3837b0b717e0a51613c65f30418e21eb99da6556a74c
   languageName: node
   linkType: hard
 
