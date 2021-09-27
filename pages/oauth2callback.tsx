@@ -43,7 +43,7 @@ export async function getServerSideProps(context: NextPageContext) {
 
   const code: string = (query.code ?? '') as string;
 
-  console.log('code');
+  console.log('code', code);
 
   let token: Credentials | null;
   let success: boolean = false;
