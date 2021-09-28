@@ -18,7 +18,7 @@ export const getToken = (
         console.log('Token:', token);
 
         return reject(
-          `Missing or invlid code. Please visit this URL to sign in: ${authUrl}`
+          `Missing or invalid code. Please visit this URL to sign in: ${authUrl}`
         );
       }
       return resolve(token ?? null);

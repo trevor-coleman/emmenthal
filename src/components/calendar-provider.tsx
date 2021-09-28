@@ -150,6 +150,7 @@ export const CalendarProvider: FunctionComponent<CalendarProviderProps> = ({
   }, []);
 
   useEffect(() => {
+    if (!options.date.range || options.date.range === 0) return;
     const calendars = calendarList.filter((c) => isChecked[c.id!]);
     const { customDate, range } = options.date;
     const interval: Interval = {

@@ -1,21 +1,10 @@
-import React, {
-  ChangeEvent,
-  EventHandler,
-  useContext,
-  useReducer,
-  useState,
-} from 'react';
-import { google, calendar_v3 } from 'googleapis';
-import calendar from '../../../pages/api/calendars';
-import {
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  Typography,
-} from '@mui/material';
+import React, { useContext } from 'react';
+import { FormGroup } from '@mui/material';
 import { CalendarContext } from '../calendar-provider';
 import { CalendarListCheckbox } from './components/calendar-list-checkbox';
 import { CalendarItem } from './calendar';
+
+import CollapsingSection from '../collapsingSection';
 
 type CalendarListProps = {};
 
@@ -23,11 +12,27 @@ export const CalendarList = ({}: CalendarListProps) => {
   const { calendars, selectedCalendars, toggleSelected } =
     useContext(CalendarContext);
 
-  return (
-    <div>
+  const persistCalendars = calendars.filter((c) =>
+    selectedCalendars.includes(c.id!)
+  );
+
+  const SelectedCalendarList = () => {
+    return (
       <div>
-        <Typography variant={'h6'}>Calendars</Typography>
+        {calendars
+          .filter((c) => selectedCalendars.includes(c.id!))
+          .map((c) => (
+            <div key={c.id!}>{c.summary}</div>
+          ))}
       </div>
+    );
+  };
+
+  return (
+    <CollapsingSection
+      title={'Calendars'}
+      closedComponent={<SelectedCalendarList />}
+    >
       <FormGroup>
         {calendars &&
           calendars.map((c: CalendarItem) => {
@@ -41,6 +46,6 @@ export const CalendarList = ({}: CalendarListProps) => {
             );
           })}
       </FormGroup>
-    </div>
+    </CollapsingSection>
   );
 };

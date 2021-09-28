@@ -28,15 +28,15 @@ const Home: NextPage = ({ authUrl, authenticated }: any) => {
 
   return (
     <Container>
-      <Header authUrl={authUrl} />
+      <Header authUrl={authUrl} authenticated={authenticated} />
       <Grid container spacing={2}>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={6}>
           <Stack spacing={2}>
             <Settings />
             <CalendarList />
           </Stack>
         </Grid>
-        <Grid item xs={4} sx={{ borderLeft: '1px solid grey', ml: 2, pl: 4 }}>
+        <Grid item xs={12} md={6}>
           <FreeBusyList />
         </Grid>
       </Grid>

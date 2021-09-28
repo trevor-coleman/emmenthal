@@ -9,7 +9,7 @@ import { useCalendarOptions } from '../calendar-provider';
 import { ChangeEvent, SyntheticEvent } from 'react';
 import * as React from 'react';
 
-const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+export const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 export const DaysOfTheWeek = () => {
   const { options, setOptions } = useCalendarOptions();
