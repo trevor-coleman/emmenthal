@@ -16,18 +16,22 @@ import {
   startOfDay,
   set,
   getMinutes,
+  max,
+  add,
 } from 'date-fns';
 import freeBusy from '../../pages/api/free-busy';
 
 export function findFreeTime(
   freeBusyData: FreeBusyData,
   selectedCalendars: string[],
-  { time: timeRange, date: { days: weekdays } }: ICalendarOptions
+  { time: timeOptions, date: { days: weekdays } }: ICalendarOptions
 ): Interval[] {
   const range: Interval = {
-    start: timeRange?.start ?? set(new Date(), { hours: 10, minutes: 0 }),
-    end: timeRange?.end ?? set(new Date(), { hours: 10, minutes: 0 }),
+    start: timeOptions?.start ?? set(new Date(), { hours: 10, minutes: 0 }),
+    end: timeOptions?.end ?? set(new Date(), { hours: 10, minutes: 0 }),
   };
+
+  const { duration } = timeOptions;
 
   const queue: Interval[] = [];
 
@@ -89,7 +93,7 @@ export function findFreeTime(
       continue;
     }
 
-    if (start <= free.end) {
+    if (start <= max([free.end, add(free.start, duration)])) {
       if (end <= free.end) {
         busy = queue.shift()!;
         continue;

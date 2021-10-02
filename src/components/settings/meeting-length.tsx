@@ -9,29 +9,54 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import * as React from 'react';
 import { Box } from '@mui/system';
+import { useCalendarOptions } from '../calendar-provider';
 
 export function MeetingLength() {
-  const [hours, setHours] = useState(1);
-  const [minutes, setMinutes] = useState(0);
+  const { options, setOptions } = useCalendarOptions();
 
-  const handleHours = (e: SelectChangeEvent<number>) => {
-    setHours(
-      typeof e.target.value === 'number'
-        ? e.target.value
-        : parseInt(e.target.value)
-    );
-  };
+  const { time } = options;
+  const { duration } = time;
 
-  const handleMinutes = (e: SelectChangeEvent<number>) => {
-    setMinutes(
-      typeof e.target.value === 'number'
-        ? e.target.value
-        : parseInt(e.target.value)
-    );
-  };
+  function setDuration(duration: Duration): void {
+    setOptions({
+      ...options,
+      time: {
+        ...options.time,
+        duration,
+      },
+    });
+  }
+
+  const handleHours = useCallback(
+    (e: SelectChangeEvent<number>) => {
+      setDuration({
+        ...duration,
+        hours:
+          typeof e.target.value === 'number'
+            ? e.target.value
+            : parseInt(e.target.value),
+      });
+    },
+    [setDuration, duration]
+  );
+
+  const { minutes, hours } = duration;
+
+  const handleMinutes = useCallback(
+    (e: SelectChangeEvent<number>) => {
+      setDuration({
+        ...duration,
+        minutes:
+          typeof e.target.value === 'number'
+            ? e.target.value
+            : parseInt(e.target.value),
+      });
+    },
+    [setDuration, duration]
+  );
 
   const isError = minutes === 0 && hours === 0;
 

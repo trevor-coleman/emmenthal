@@ -29,6 +29,7 @@ export interface ICalendarOptions {
   time: {
     start: Date | number | null;
     end: Date | number | null;
+    duration: Duration;
   };
 }
 
@@ -51,6 +52,7 @@ const blankContext: ICalendarContextData = {
     time: {
       start: set(new Date(), { hours: 10, minutes: 0 }),
       end: set(new Date(), { hours: 18, minutes: 0 }),
+      duration: { hours: 1, minutes: 0 },
     },
   },
   calendars: [],
