@@ -29,23 +29,18 @@ export const CalendarList = ({}: CalendarListProps) => {
   };
 
   return (
-    <CollapsingSection
-      title={'Calendars'}
-      closedComponent={<SelectedCalendarList />}
-    >
-      <FormGroup>
-        {calendars &&
-          calendars.map((c: CalendarItem) => {
-            return (
-              <CalendarListCheckbox
-                key={c.id}
-                checked={selectedCalendars.includes(c.id!)}
-                calendar={c}
-                onCheck={(e) => toggleSelected(c.id!)}
-              />
-            );
-          })}
-      </FormGroup>
-    </CollapsingSection>
+    <FormGroup>
+      {calendars &&
+        calendars.map((c: CalendarItem) => {
+          return (
+            <CalendarListCheckbox
+              key={c.id}
+              checked={selectedCalendars.includes(c.id!)}
+              calendar={c}
+              onCheck={(e) => toggleSelected(c.id!)}
+            />
+          );
+        })}
+    </FormGroup>
   );
 };

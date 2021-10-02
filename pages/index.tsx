@@ -21,6 +21,7 @@ import { CalendarList } from '../src/components/calendar-list/calendar-list';
 import { FreeBusyList } from '../src/components/free-busy-list/free-busy-list';
 import { Settings } from '../src/components/settings/settings';
 import { Header } from '../src/components/header';
+import { ButtonBar } from '../src/components/settings/button-bar';
 
 const Home: NextPage = ({ authUrl, authenticated }: any) => {
   const { calendars, freeBusyData } = useCalendarContext();
@@ -30,6 +31,9 @@ const Home: NextPage = ({ authUrl, authenticated }: any) => {
     <Container>
       <Header authUrl={authUrl} authenticated={authenticated} />
       <Grid container spacing={2}>
+        <Grid item xs={12}>
+          <ButtonBar />
+        </Grid>
         <Grid item xs={12} md={6}>
           <Stack spacing={2}>
             <Settings />
