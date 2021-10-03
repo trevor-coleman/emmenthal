@@ -31,12 +31,6 @@ export const FreeBusyList = () => {
 
   return (
     <Box sx={{ width: '100%' }}>
-      <Typography variant={'h6'}>Free Times</Typography>
-      <CopyToClipboard text={freeTimeText}>
-        <Button disabled={freeTime.length === 0} variant={'outlined'}>
-          Copy as Plain Text
-        </Button>
-      </CopyToClipboard>
       <List>
         {freeTime.map((interval, index) => {
           return (

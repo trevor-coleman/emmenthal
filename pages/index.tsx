@@ -13,6 +13,7 @@ import {
   Box,
   Button,
   Grid,
+  useTheme,
 } from '@mui/material';
 import { useCalendarContext } from '../src/components/calendar-provider';
 import { authenticate } from '../src/api-calls/authenticate';
@@ -22,28 +23,25 @@ import { FreeBusyList } from '../src/components/free-busy-list/free-busy-list';
 import { Settings } from '../src/components/settings/settings';
 import { Header } from '../src/components/header';
 import { ButtonBar } from '../src/components/settings/button-bar';
+import CopyToClipboard from 'react-copy-to-clipboard';
+import React from 'react';
 
 const Home: NextPage = ({ authUrl, authenticated }: any) => {
   const { calendars, freeBusyData } = useCalendarContext();
   const router = useRouter();
+  const theme = useTheme();
 
   return (
-    <Container>
+    <Container maxWidth={'sm'} sx={{ bgcolor: 'white', height: '100vh' }}>
       <Header authUrl={authUrl} authenticated={authenticated} />
-      <Grid container spacing={2}>
-        <Grid item xs={12}>
-          <ButtonBar />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Stack spacing={2}>
-            <Settings />
-            <CalendarList />
-          </Stack>
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <FreeBusyList />
-        </Grid>
-      </Grid>
+      <Stack>
+        <Typography variant={'h5'}>Settings</Typography>
+        <ButtonBar />
+      </Stack>
+      <Stack>
+        <Typography variant={'h4'}>Free Times</Typography>
+        <FreeBusyList />
+      </Stack>
     </Container>
   );
 };

@@ -15,12 +15,12 @@ import {
   set,
   startOfTomorrow,
 } from 'date-fns';
-import { DateRangePicker } from './date-range-picker';
+import { DateRangePicker } from '../date-range/date-range-picker';
 import { useCalendarOptions } from '../calendar-provider';
 import { daysOfTheWeek, DaysOfTheWeek } from './days-of-the-week';
 import CollapsingSection from '../collapsingSection';
 import { MeetingLength } from './meeting-length';
-import { DateRange } from './date-range';
+import { DateRange } from '../date-range/date-range';
 import { TimeRange } from './time-range';
 
 export function Settings() {

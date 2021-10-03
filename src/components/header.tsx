@@ -56,15 +56,15 @@ export const Header = ({
             flexDirection: 'column',
           }}
         >
+          <Typography variant={'h3'} sx={{ fontSize: '1.75rem', pl: '6.5rem' }}>
+            Find Holes in your Schedule
+          </Typography>
           <Stack direction={'row'} alignItems={'center'} spacing={2}>
             <Box sx={{ width: '5rem' }}>
               <Image src={emmenthalLogo} />
             </Box>
             <Typography variant={'h1'}>Emmenthal</Typography>
           </Stack>
-          <Typography variant={'h3'} sx={{ fontSize: '1.75rem', pl: '6.5rem' }}>
-            Find Holes in your Schedule
-          </Typography>
         </Box>
         {authUrl && !authenticated ? (
           <Button

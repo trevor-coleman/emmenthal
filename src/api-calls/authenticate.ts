@@ -38,6 +38,8 @@ export function authenticate(
       return resolve({ auth, authenticated: true, token });
     } catch (e) {
       return resolve({ auth, authenticated: false });
+    } finally {
+      return { auth: null, authenicated: false };
     }
   });
 }
