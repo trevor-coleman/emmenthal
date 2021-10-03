@@ -32,16 +32,21 @@ const Home: NextPage = ({ authUrl, authenticated }: any) => {
   const theme = useTheme();
 
   return (
-    <Container maxWidth={'sm'} sx={{ bgcolor: 'white', height: '100vh' }}>
-      <Header authUrl={authUrl} authenticated={authenticated} />
-      <Stack>
-        <Typography variant={'h5'}>Settings</Typography>
-        <ButtonBar />
-      </Stack>
-      <Stack>
-        <Typography variant={'h4'}>Free Times</Typography>
-        <FreeBusyList />
-      </Stack>
+    <Container maxWidth={'md'} sx={{ bgcolor: 'white', height: '100vh' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <Box flexGrow={0}>
+          <Header authUrl={authUrl} authenticated={authenticated} />
+        </Box>
+        <Box flexGrow={0}>
+          <ButtonBar />
+        </Box>
+        <Box flexGrow={0}>
+          <Typography variant={'h4'}>Free Times</Typography>
+        </Box>
+        <Box flexGrow={1} sx={{ overflow: 'scroll' }}>
+          <FreeBusyList />
+        </Box>
+      </Box>
     </Container>
   );
 };

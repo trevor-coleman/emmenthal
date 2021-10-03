@@ -5,6 +5,7 @@ import {
   Paper,
   Popover,
   PopoverProps,
+  useTheme,
 } from '@mui/material';
 import React, { createContext, PropsWithChildren, useContext } from 'react';
 
@@ -30,6 +31,7 @@ export function SettingsButton({
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
+  const theme = useTheme();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -46,10 +48,24 @@ export function SettingsButton({
     <Box component={'span'}>
       <Button
         variant={'text'}
-        color={'secondary'}
+        color={'info'}
         onClick={handleClick}
         {...buttonProps}
-        sx={{ display: 'inline' }}
+        component={'span'}
+        sx={{
+          display: 'inline',
+          fontSize: 'inherit',
+          textTransform: 'none',
+          textDecoration: 'underline',
+          textDecorationColor: theme.palette.text.primary,
+          textDecorationWidth: '1px',
+          textDecorationStyle: 'dashed',
+          margin: '0.1em',
+          padding: 0,
+          verticalAlign: 'baseline',
+          whiteSpace: 'inherit',
+          wordWrap: 'inherit',
+        }}
       >
         {label}
       </Button>
