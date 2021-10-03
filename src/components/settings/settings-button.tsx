@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   ButtonProps,
   Paper,
@@ -42,12 +43,13 @@ export function SettingsButton({
   const popoverId = open ? id : undefined;
 
   return (
-    <>
+    <Box component={'span'}>
       <Button
-        variant={'outlined'}
+        variant={'text'}
         color={'secondary'}
         onClick={handleClick}
         {...buttonProps}
+        sx={{ display: 'inline' }}
       >
         {label}
       </Button>
@@ -76,7 +78,7 @@ export function SettingsButton({
           </Paper>
         </SettingsButtonContext.Provider>
       </Popover>
-    </>
+    </Box>
   );
 }
 

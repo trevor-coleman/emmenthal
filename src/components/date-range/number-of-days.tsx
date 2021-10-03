@@ -2,7 +2,7 @@ import { FormGroup, Stack, TextField } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 import { useCalendarOptions } from '../calendar-provider';
 import { OptionButton } from '../settings/options-button';
-import { useSettingsButtonOnSelect } from '../settings-button';
+import { useSettingsButtonOnSelect } from '../settings/settings-button';
 
 export function NumberOfDays() {
   const onSelect = useSettingsButtonOnSelect();

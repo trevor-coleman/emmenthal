@@ -1,7 +1,7 @@
 import { Box, Button, Modal, Paper, Popover } from '@mui/material';
 import { CalendarList } from './calendar-list';
 import React, { useCallback, useState } from 'react';
-import { SettingsButton } from '../settings-button';
+import { SettingsButton } from '../settings/settings-button';
 import { useCalendarContext, useCalendarOptions } from '../calendar-provider';
 import { calendar } from 'googleapis/build/src/apis/calendar';
 

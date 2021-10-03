@@ -1,5 +1,5 @@
 import { NumberOfDays } from './number-of-days';
-import { SettingsButton } from '../settings-button';
+import { SettingsButton } from '../settings/settings-button';
 import { useCalendarOptions } from '../calendar-provider';
 import { useMemo } from 'react';
 

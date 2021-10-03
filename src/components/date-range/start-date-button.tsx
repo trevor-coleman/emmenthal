@@ -1,4 +1,4 @@
-import { SettingsButton } from '../settings-button';
+import { SettingsButton } from '../settings/settings-button';
 import { StartDate } from './start-date';
 import { useCalendarOptions } from '../calendar-provider';
 import { useMemo } from 'react';

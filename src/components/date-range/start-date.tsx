@@ -24,7 +24,7 @@ import { DatePicker } from '@mui/lab';
 import React, { useCallback, useMemo } from 'react';
 import { useCalendarOptions } from '../calendar-provider';
 import { Check } from '@mui/icons-material';
-import { useSettingsButtonOnSelect } from '../settings-button';
+import { useSettingsButtonOnSelect } from '../settings/settings-button';
 import { OptionButton } from '../settings/options-button';
 
 export function StartDate() {
