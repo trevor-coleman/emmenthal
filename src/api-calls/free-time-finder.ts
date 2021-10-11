@@ -1,15 +1,11 @@
-import { calendar_v3 } from 'googleapis';
 import {
   FreeBusyData,
   ICalendarOptions,
 } from '../components/calendar-provider';
 import {
   isBefore,
-  isAfter,
   isEqual,
   Interval,
-  format,
-  setHours,
   getHours,
   getDay,
   endOfDay,
@@ -19,7 +15,6 @@ import {
   max,
   add,
 } from 'date-fns';
-import freeBusy from '../../pages/api/free-busy';
 
 export function findFreeTime(
   freeBusyData: FreeBusyData,

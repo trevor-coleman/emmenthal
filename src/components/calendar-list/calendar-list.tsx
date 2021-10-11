@@ -4,8 +4,6 @@ import { CalendarContext } from '../calendar-provider';
 import { CalendarListCheckbox } from './components/calendar-list-checkbox';
 import { CalendarItem } from './calendar';
 
-import CollapsingSection from '../collapsingSection';
-
 type CalendarListProps = {};
 
 export const CalendarList = ({}: CalendarListProps) => {

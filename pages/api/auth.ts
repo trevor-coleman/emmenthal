@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { authenticate } from '../../src/api-calls/authenticate';
 import Cookies from 'cookies';
-import { getFreeBusy } from '../../src/api-calls/free-busy';
 import { google, oauth2_v2 } from 'googleapis';
 import { getAuthUrl } from '../../src/api-calls/google-auth';
 

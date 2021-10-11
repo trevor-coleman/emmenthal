@@ -1,15 +1,4 @@
-import {
-  Box,
-  Button,
-  Grid,
-  IconButton,
-  Stack,
-  Typography,
-  Theme,
-  styled,
-} from '@mui/material';
-import { makeStyles } from '@mui/styles';
-import { CSSTransition } from 'react-transition-group';
+import { Box, Button, IconButton, Typography } from '@mui/material';
 import { CalendarsButton } from '../calendar-list/calendars-button';
 import { StartDateButton } from '../date-range/start-date-button';
 import { DaysOfTheWeekButton } from './days-of-the-week-button';
@@ -22,16 +11,8 @@ import React, {
   useState,
 } from 'react';
 import { SettingsButton } from './settings-button';
-import { MeetingLength } from './meeting-length';
 import { MeetingLengthButton } from './meeting-length-button';
-import {
-  Done,
-  Edit,
-  EditOutlined,
-  ExpandLess,
-  ExpandMore,
-  Google,
-} from '@mui/icons-material';
+import { Done, Edit, Google } from '@mui/icons-material';
 import theme from '../../theme';
 import { useAuth } from '../auth-provider';
 

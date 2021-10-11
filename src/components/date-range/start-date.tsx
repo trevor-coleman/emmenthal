@@ -1,7 +1,5 @@
 import {
   differenceInCalendarWeeks,
-  format,
-  isEqual,
   isMonday,
   isTomorrow,
   nextMonday,
@@ -9,21 +7,10 @@ import {
   startOfToday,
   startOfTomorrow,
 } from 'date-fns';
-import {
-  Button,
-  ButtonProps,
-  Checkbox,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Stack,
-  TextField,
-} from '@mui/material';
+import { Stack, TextField } from '@mui/material';
 import { DatePicker } from '@mui/lab';
 import React, { useCallback, useMemo } from 'react';
 import { useCalendarOptions } from '../calendar-provider';
-import { Check } from '@mui/icons-material';
 import { useSettingsButtonOnSelect } from '../settings/settings-button';
 import { OptionButton } from '../settings/options-button';
 

@@ -8,14 +8,8 @@ import theme from '../src/theme';
 import createEmotionCache from '../src/create-emotion-cache';
 import { LocalizationProvider } from '@mui/lab';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
-import { CalendarProvider } from '../src/components/calendar-provider';
 import '../src/components/settings/button-bar.css';
-import { AuthProvider, IAuthContext } from '../src/components/auth-provider';
-import { NextPageContext } from 'next';
-import { authenticate } from '../src/api-calls/authenticate';
-
-import Cookies from 'cookies';
-import { getAuthUrl } from '../src/api-calls/google-auth';
+import { IAuthContext } from '../src/components/auth-provider';
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();

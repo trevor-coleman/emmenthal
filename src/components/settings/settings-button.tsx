@@ -3,7 +3,6 @@ import {
   Button,
   ButtonProps,
   Paper,
-  PaperProps,
   Popover,
   PopoverProps,
   useTheme,

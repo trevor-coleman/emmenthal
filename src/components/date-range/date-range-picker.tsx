@@ -1,12 +1,4 @@
-import {
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  Slider,
-  Tooltip,
-} from '@mui/material';
+import { Slider } from '@mui/material';
 import { useState } from 'react';
 import {
   endOfDay,

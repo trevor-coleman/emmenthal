@@ -1,11 +1,10 @@
 import React from 'react';
-import { Box, Button, List, Typography } from '@mui/material';
+import { Box, List } from '@mui/material';
 import { useCalendarContext } from '../calendar-provider';
 import { TimePeriodListItem } from '../time-period-list-item';
 import { findFreeTime } from '../../api-calls/free-time-finder';
 import { formatRFC3339, getDay } from 'date-fns';
 import { DayDivider } from './components/day-divider';
-import CopyToClipboard from 'react-copy-to-clipboard';
 import { formatFreeTimeText } from './format-free-time-text';
 
 let lastDay: Date | number | undefined;

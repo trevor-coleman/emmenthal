@@ -1,7 +1,6 @@
 import {
   FormControl,
   FormGroup,
-  FormLabel,
   InputLabel,
   MenuItem,
   Select,
@@ -9,7 +8,7 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import * as React from 'react';
 import { Box } from '@mui/system';
 import { useCalendarOptions } from '../calendar-provider';

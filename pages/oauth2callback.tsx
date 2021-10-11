@@ -1,14 +1,10 @@
 import React from 'react';
 import { useRouter } from 'next/router';
-import { NextApiRequest, NextApiResponse, NextPageContext } from 'next';
+import { NextPageContext } from 'next';
 import Cookies from 'cookies';
 import { getToken } from '../src/api-calls/get-token';
 import { getAuth } from '../src/api-calls/google-auth';
-import withAuthentication from '../src/api-calls/with-authentication';
-import { IncomingMessage } from 'connect';
-import { ServerResponse } from 'http';
-import { Credentials, OAuth2Client } from 'google-auth-library';
-import { addDays, fromUnixTime } from 'date-fns';
+import { Credentials } from 'google-auth-library';
 
 export default function Oauth2callback({
   token,

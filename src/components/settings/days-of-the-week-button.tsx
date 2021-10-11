@@ -21,8 +21,7 @@ function isWeekend(days: DaysTuple) {
 }
 
 function everyDay(days: DaysTuple) {
-  if (days.some((i) => !i)) return false;
-  return true;
+  return !days.some((i) => !i);
 }
 
 export function DaysOfTheWeekButton() {

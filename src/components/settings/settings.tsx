@@ -1,21 +1,6 @@
-import {
-  Box,
-  Stack,
-  TextField,
-  Typography,
-  TextFieldProps,
-} from '@mui/material';
-import React, { forwardRef, useState, MouseEventHandler } from 'react';
-import { DatePicker, TimePicker } from '@mui/lab';
-import {
-  addDays,
-  format,
-  getDay,
-  isTomorrow,
-  set,
-  startOfTomorrow,
-} from 'date-fns';
-import { DateRangePicker } from '../date-range/date-range-picker';
+import { Stack } from '@mui/material';
+import React from 'react';
+import { format, startOfTomorrow } from 'date-fns';
 import { useCalendarOptions } from '../calendar-provider';
 import { daysOfTheWeek, DaysOfTheWeek } from './days-of-the-week';
 import CollapsingSection from '../collapsingSection';
@@ -36,8 +21,8 @@ export function Settings() {
       </Stack>
 
       <Stack direction={'row'} spacing={1}>
-        {date.days.sort().map((d) => (
-          <div key={daysOfTheWeek[d]}>{daysOfTheWeek[d]}</div>
+        {date.days.sort().map((d, index) => (
+          <div key={daysOfTheWeek[index]}>{daysOfTheWeek[index]}</div>
         ))}
       </Stack>
     </Stack>

@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getFreeBusy } from '../../src/api-calls/free-busy';
-import withAuthentication from '../../src/api-calls/with-authentication';
 import { authenticate } from '../../src/api-calls/authenticate';
 import Cookies from 'cookies';
 

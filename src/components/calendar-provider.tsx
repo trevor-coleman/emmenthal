@@ -9,7 +9,7 @@ import React, {
 import axios, { AxiosResponse } from 'axios';
 import { calendar_v3 } from 'googleapis';
 import { FreeBusyResponse } from '../api-calls/free-busy';
-import { addDays, set, startOfDay, startOfTomorrow } from 'date-fns';
+import { addDays, set, startOfTomorrow } from 'date-fns';
 import { useAuth } from './auth-provider';
 
 type Calendar = calendar_v3.Schema$CalendarListEntry;

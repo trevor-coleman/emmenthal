@@ -1,6 +1,5 @@
-import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
+import { NextApiHandler } from 'next';
 import { google } from 'googleapis';
-import { getAuth } from '../../src/api-calls/google-auth';
 import { authenticate } from '../../src/api-calls/authenticate';
 import Cookies from 'cookies';
 

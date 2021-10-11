@@ -1,9 +1,8 @@
 import React from 'react';
 import emmenthalLogo from '../../public/emmenthal-logo.png';
 import Image from 'next/image';
-import { Box, Button, Typography, Link, Stack } from '@mui/material';
+import { Box, Typography, Link, Stack } from '@mui/material';
 import { useRouter } from 'next/router';
-import { Google } from '@mui/icons-material';
 import { useAuth } from './auth-provider';
 
 export const Header = () => {

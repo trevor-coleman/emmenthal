@@ -3,7 +3,6 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { IncomingMessage, ServerResponse } from 'http';
 import { Credentials, OAuth2Client } from 'google-auth-library';
 import cookie from 'cookie';
-import axios from 'axios';
 
 export function authenticate(
   req: NextApiRequest | IncomingMessage | undefined,

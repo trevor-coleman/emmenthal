@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { google } from 'googleapis';
 import { OAuth2Client, Credentials } from 'google-auth-library';
 import { getAuth } from './google-auth';
 

@@ -2,21 +2,10 @@ import React, {
   FunctionComponent,
   PropsWithChildren,
   ReactElement,
-  ReactNode,
   useState,
 } from 'react';
-import {
-  Collapse,
-  Fade,
-  FormGroup,
-  IconButton,
-  Stack,
-  Typography,
-  Box,
-} from '@mui/material';
+import { Collapse, IconButton, Stack, Typography, Box } from '@mui/material';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { CalendarItem } from './calendar-list/calendar';
-import { CalendarListCheckbox } from './calendar-list/components/calendar-list-checkbox';
 
 interface ICollapsingSectionProps {
   title: string;

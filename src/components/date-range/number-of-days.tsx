@@ -1,4 +1,4 @@
-import { FormGroup, Stack, TextField } from '@mui/material';
+import { Stack, TextField } from '@mui/material';
 import React, { useCallback, useState } from 'react';
 import { useCalendarOptions } from '../calendar-provider';
 import { OptionButton } from '../settings/options-button';

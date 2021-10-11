@@ -6,7 +6,6 @@ import {
   FormLabel,
 } from '@mui/material';
 import { DaysTuple, useCalendarOptions } from '../calendar-provider';
-import { ChangeEvent, SyntheticEvent } from 'react';
 import * as React from 'react';
 
 export const daysOfTheWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];

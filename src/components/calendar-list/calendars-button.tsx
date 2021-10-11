@@ -1,9 +1,7 @@
-import { Box, Button, Modal, Paper, Popover } from '@mui/material';
 import { CalendarList } from './calendar-list';
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { SettingsButton } from '../settings/settings-button';
-import { useCalendarContext, useCalendarOptions } from '../calendar-provider';
-import { calendar } from 'googleapis/build/src/apis/calendar';
+import { useCalendarContext } from '../calendar-provider';
 
 export function CalendarsButton() {
   const { calendars, selectedCalendars } = useCalendarContext();
