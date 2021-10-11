@@ -11,7 +11,7 @@ export const TimePeriodListItem = ({
   const { start, end } = timePeriod;
 
   return (
-    <ListItem>
+    <ListItem dense>
       <Stack direction={'row'} width={'100%'} justifyContent={'flex-start'}>
         {`• ${format(start, 'h:mmaaaaa')} - ${format(end, 'h:mmaaaaa')}`}
       </Stack>

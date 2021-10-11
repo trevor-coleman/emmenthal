@@ -1,0 +1,17 @@
+.button-bar-enter {
+    font-size: 1rem;
+}
+
+.button-bar-enter-active {
+    font-size: 1.5rem;
+    transition: font-size 200ms;
+}
+
+.button-bar-exit {
+    font-size: 1.5rem;
+}
+
+.button-bar-exit-active {
+    font-size: 1rem;
+    transition: font-size 200ms;
+}

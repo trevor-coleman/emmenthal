@@ -58,6 +58,7 @@ export async function getFreeBusy(
 
     return freebusy;
   } catch (error: unknown) {
+    console.log('Caught:', (error as Error)?.message);
     throw error;
   }
 }

@@ -4,15 +4,11 @@ import Image from 'next/image';
 import { Box, Button, Typography, Link, Stack } from '@mui/material';
 import { useRouter } from 'next/router';
 import { Google } from '@mui/icons-material';
+import { useAuth } from './auth-provider';
 
-export const Header = ({
-  authUrl,
-  authenticated,
-}: {
-  authUrl?: string;
-  authenticated: boolean;
-}) => {
+export const Header = () => {
   const router = useRouter();
+  const { authUrl, authenticated, signIn } = useAuth();
   return (
     <header>
       <Box sx={{ my: 2 }}>
@@ -66,19 +62,6 @@ export const Header = ({
             <Typography variant={'h1'}>Emmenthal</Typography>
           </Stack>
         </Box>
-        {authUrl && !authenticated ? (
-          <Button
-            startIcon={<Google />}
-            variant={'contained'}
-            onClick={() => {
-              void router.push(authUrl);
-            }}
-          >
-            Sign In With Google
-          </Button>
-        ) : (
-          ''
-        )}
       </Box>
     </header>
   );

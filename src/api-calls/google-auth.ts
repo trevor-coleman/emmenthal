@@ -11,7 +11,11 @@ export function getAuth() {
   return googleAuth;
 }
 
-const SCOPES = ['https://www.googleapis.com/auth/calendar.readonly'];
+const SCOPES = [
+  'https://www.googleapis.com/auth/calendar.readonly',
+  'https://www.googleapis.com/auth/userinfo.email',
+  'https://www.googleapis.com/auth/userinfo.profile',
+];
 
 export function getAuthUrl() {
   return googleAuth.generateAuthUrl({

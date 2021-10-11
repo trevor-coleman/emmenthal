@@ -5,7 +5,7 @@ import {
   FormGroup,
   FormLabel,
 } from '@mui/material';
-import { useCalendarOptions } from '../calendar-provider';
+import { DaysTuple, useCalendarOptions } from '../calendar-provider';
 import { ChangeEvent, SyntheticEvent } from 'react';
 import * as React from 'react';
 
@@ -17,10 +17,8 @@ export const DaysOfTheWeek = () => {
   const { days } = options.date;
 
   function toggleDay(index: number, event: any) {
-    const newDays = days.filter((i) => i !== index);
-    if (event.target.checked) {
-      newDays.push(index);
-    }
+    const newDays: DaysTuple = [...days];
+    newDays[index] = event.target.checked;
 
     setOptions({
       ...options,
@@ -38,7 +36,7 @@ export const DaysOfTheWeek = () => {
           <FormControlLabel
             sx={{ m: 0 }}
             key={day}
-            checked={days.includes(index)}
+            checked={days[index]}
             onChange={(event) => {
               toggleDay(index, event);
             }}

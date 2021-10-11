@@ -3,17 +3,21 @@ import {
   Button,
   ButtonProps,
   Paper,
+  PaperProps,
   Popover,
   PopoverProps,
   useTheme,
 } from '@mui/material';
 import React, { createContext, PropsWithChildren, useContext } from 'react';
+import { useButtonBarState } from './button-bar';
+import { SxProps } from '@mui/system';
 
 interface ISettingsButtonProps {
   id: string;
   label: string;
   buttonProps?: ButtonProps;
   popOverProps?: Omit<PopoverProps, 'open'>;
+  paperStyle?: SxProps;
 }
 
 export const SettingsButtonContext = createContext<
@@ -27,10 +31,12 @@ export function SettingsButton({
   children,
   buttonProps,
   popOverProps,
+  paperStyle,
 }: SettingsButtonProps) {
   const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
     null
   );
+  const isExpanded = useButtonBarState();
   const theme = useTheme();
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -44,7 +50,7 @@ export function SettingsButton({
   const open = Boolean(anchorEl);
   const popoverId = open ? id : undefined;
 
-  return (
+  return isExpanded ? (
     <Box component={'span'}>
       <Button
         variant={'text'}
@@ -75,7 +81,7 @@ export function SettingsButton({
         anchorEl={anchorEl}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'bottom',
+          vertical: 'top',
           horizontal: 'left',
         }}
         {...popOverProps}
@@ -88,6 +94,8 @@ export function SettingsButton({
           <Paper
             sx={{
               p: 2,
+              minWidth: '15rem',
+              ...paperStyle,
             }}
           >
             {children}
@@ -95,6 +103,8 @@ export function SettingsButton({
         </SettingsButtonContext.Provider>
       </Popover>
     </Box>
+  ) : (
+    <span>{label}</span>
   );
 }
 

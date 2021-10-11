@@ -61,55 +61,51 @@ export function MeetingLength() {
   const isError = minutes === 0 && hours === 0;
 
   return (
-    <FormControl component='fieldset'>
-      <FormLabel component='legend'>Meeting Length</FormLabel>
-
-      <FormGroup>
-        <Stack direction={'row'} spacing={1}>
-          <Box width={'50%'}>
-            <FormControl fullWidth>
-              <InputLabel id='hours-label'>Hours</InputLabel>
-              <Select
-                labelId='hours-label'
-                id='hours'
-                error={isError}
-                value={hours}
-                label='Hours'
-                onChange={handleHours}
-              >
-                {Array.from(new Array(12))
-                  .map((x, i) => i)
-                  .map((x) => (
-                    <MenuItem key={x} value={x}>
-                      {x}
-                    </MenuItem>
-                  ))}
-              </Select>
-            </FormControl>
-          </Box>
-          <Box width={'50%'}>
-            <FormControl fullWidth>
-              <InputLabel id='minutes-label'>Minutes</InputLabel>
-              <Select
-                labelId='minutes-label'
-                error={isError}
-                id='minutes'
-                value={minutes}
-                label='Minutes'
-                onChange={handleMinutes}
-              >
-                {Array.from(new Array(12))
-                  .map((x, i) => i * 5)
-                  .map((x) => (
-                    <MenuItem key={x} value={x}>
-                      {x}
-                    </MenuItem>
-                  ))}
-              </Select>
-            </FormControl>
-          </Box>
-        </Stack>
-      </FormGroup>
+    <FormGroup>
+      <Stack direction={'row'} spacing={1}>
+        <Box width={'50%'}>
+          <FormControl fullWidth>
+            <InputLabel id='hours-label'>Hours</InputLabel>
+            <Select
+              labelId='hours-label'
+              id='hours'
+              error={isError}
+              value={hours}
+              label='Hours'
+              onChange={handleHours}
+            >
+              {Array.from(new Array(12))
+                .map((x, i) => i)
+                .map((x) => (
+                  <MenuItem key={x} value={x}>
+                    {x}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
+        </Box>
+        <Box width={'50%'}>
+          <FormControl fullWidth>
+            <InputLabel id='minutes-label'>Minutes</InputLabel>
+            <Select
+              labelId='minutes-label'
+              error={isError}
+              id='minutes'
+              value={minutes}
+              label='Minutes'
+              onChange={handleMinutes}
+            >
+              {Array.from(new Array(12))
+                .map((x, i) => i * 5)
+                .map((x) => (
+                  <MenuItem key={x} value={x}>
+                    {x}
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl>
+        </Box>
+      </Stack>
       {isError && (
         <Typography
           paragraph={false}
@@ -124,6 +120,6 @@ export function MeetingLength() {
           Meeting length must be at least 5 minutes
         </Typography>
       )}
-    </FormControl>
+    </FormGroup>
   );
 }

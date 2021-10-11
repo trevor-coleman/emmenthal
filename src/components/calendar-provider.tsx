@@ -10,6 +10,7 @@ import axios, { AxiosResponse } from 'axios';
 import { calendar_v3 } from 'googleapis';
 import { FreeBusyResponse } from '../api-calls/free-busy';
 import { addDays, set, startOfDay, startOfTomorrow } from 'date-fns';
+import { useAuth } from './auth-provider';
 
 type Calendar = calendar_v3.Schema$CalendarListEntry;
 type Calendars = Calendar[];
@@ -20,11 +21,21 @@ interface ICalendarProviderProps {}
 
 type CalendarProviderProps = PropsWithChildren<ICalendarProviderProps>;
 
+export type DaysTuple = [
+  boolean,
+  boolean,
+  boolean,
+  boolean,
+  boolean,
+  boolean,
+  boolean
+];
+
 export interface ICalendarOptions {
   date: {
     customDate?: Date | number | null;
     range: number | null;
-    days: number[];
+    days: DaysTuple;
   };
   time: {
     start: Date | number | null;
@@ -47,7 +58,7 @@ const blankContext: ICalendarContextData = {
     date: {
       customDate: undefined,
       range: 7,
-      days: [1, 2, 3, 4, 5],
+      days: [false, true, true, true, true, true, false],
     },
     time: {
       start: set(new Date(), { hours: 10, minutes: 0 }),
@@ -128,11 +139,13 @@ export const CalendarContext = createContext<ICalendarContext>({
 export const CalendarProvider: FunctionComponent<CalendarProviderProps> = ({
   children,
 }: CalendarProviderProps) => {
+  const { authenticated } = useAuth();
   const [calendarList, setCalendarList] = useState<Calendars>(init().calendars);
   const [isChecked, setIsChecked] = useState<Record<string, boolean>>(
     init().isChecked
   );
   const [freeBusyData, setFreeBusyData] = useState<FreeBusyData>({});
+  const [options, setOptions] = useState(init().options);
 
   function toggleCheck(id: string) {
     const newIsChecked = {
@@ -145,13 +158,14 @@ export const CalendarProvider: FunctionComponent<CalendarProviderProps> = ({
     }
   }
 
-  const [options, setOptions] = useState(init().options);
-
   useEffect(() => {
+    console.log('getCalendars thinks: ', authenticated);
+    if (!authenticated) return;
     void getCalendars(setCalendarList);
-  }, []);
+  }, [setCalendarList, getCalendars, authenticated]);
 
   useEffect(() => {
+    if (!authenticated) return;
     if (!options.date.range || options.date.range === 0) return;
     const calendars = calendarList.filter((c) => isChecked[c.id!]);
     const { customDate, range } = options.date;
@@ -161,7 +175,7 @@ export const CalendarProvider: FunctionComponent<CalendarProviderProps> = ({
     };
 
     void getFreeBusy(calendars, interval, setFreeBusyData);
-  }, [isChecked, options, calendarList]);
+  }, [isChecked, options, calendarList, authenticated]);
 
   const selectedCalendars = Object.keys(isChecked).filter((k) => isChecked[k]);
 
@@ -206,13 +220,23 @@ async function getFreeBusy(
   handleResult: (result: FreeBusyData) => void
 ) {
   console.log('getting FreeBusy');
-  const res = await axios.post<Calendars, AxiosResponse<FreeBusyResponse>>(
-    'api/free-busy',
-    {
-      calendars,
-      interval,
-    }
-  );
+
+  let res: AxiosResponse<FreeBusyResponse> | undefined;
+
+  try {
+    res = await axios.post<Calendars, AxiosResponse<FreeBusyResponse>>(
+      'api/free-busy',
+      {
+        calendars,
+        interval,
+      }
+    );
+  } catch (error) {}
+
+  if (!res) {
+    handleResult({});
+    return;
+  }
 
   const result: FreeBusyData = {};
 

@@ -9,17 +9,25 @@ export function MeetingLengthButton() {
   const {
     time: { duration },
   } = options;
-
+  const { hours, minutes } = duration;
   const label = useMemo(() => {
-    const { hours, minutes } = duration;
+    const result = formatDuration(duration);
 
-    return formatDuration(duration);
-
-    return '1 hour';
+    return result ? result : '0 minutes';
   }, [duration]);
 
   return (
-    <SettingsButton id='meeting-length' label={label}>
+    <SettingsButton
+      id='meeting-length'
+      label={label}
+      buttonProps={
+        hours === 0 && minutes === 0
+          ? {
+              color: 'error',
+            }
+          : undefined
+      }
+    >
       <MeetingLength />
     </SettingsButton>
   );

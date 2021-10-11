@@ -21,5 +21,8 @@ const theme = createTheme({
       main: '#11a1d3',
     },
   },
+  typography: {
+    fontFamily: 'Lato, sans-serif',
+  },
 });
 export default theme;

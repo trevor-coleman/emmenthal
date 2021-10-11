@@ -88,7 +88,7 @@ export function findFreeTime(
       free.end = free.start;
     }
 
-    if (!weekdays.includes(getDay(start))) {
+    if (!weekdays[getDay(start)]) {
       busy = queue.shift()!;
       continue;
     }
