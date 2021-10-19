@@ -51,6 +51,7 @@ interface ICalendarContextData {
   selectedCalendars: string[];
   isChecked: Record<string, boolean>;
   toggleSelected: (id: string) => void;
+  primaryCalendar: Calendar | null;
 }
 
 const blankContext: ICalendarContextData = {
@@ -67,6 +68,7 @@ const blankContext: ICalendarContextData = {
     },
   },
   calendars: [],
+  primaryCalendar: null,
   selectedCalendars: [],
   freeBusyData: {},
   isChecked: {},
@@ -141,6 +143,7 @@ export const CalendarProvider: FunctionComponent<CalendarProviderProps> = ({
 }: CalendarProviderProps) => {
   const { authenticated } = useAuth();
   const [calendarList, setCalendarList] = useState<Calendars>(init().calendars);
+  const [primaryCalendar, setPrimaryCalendar] = useState<Calendar | null>(null);
   const [isChecked, setIsChecked] = useState<Record<string, boolean>>(
     init().isChecked
   );
@@ -161,7 +164,7 @@ export const CalendarProvider: FunctionComponent<CalendarProviderProps> = ({
   useEffect(() => {
     console.log('getCalendars thinks: ', authenticated);
     if (!authenticated) return;
-    void getCalendars(setCalendarList);
+    void getCalendars(setCalendarList, setPrimaryCalendar);
   }, [setCalendarList, getCalendars, authenticated]);
 
   useEffect(() => {
@@ -184,6 +187,7 @@ export const CalendarProvider: FunctionComponent<CalendarProviderProps> = ({
     setOptions,
     freeBusyData,
     isChecked,
+    primaryCalendar,
     calendars: calendarList,
     selectedCalendars,
     toggleSelected: toggleCheck,
@@ -200,16 +204,26 @@ export const CalendarProvider: FunctionComponent<CalendarProviderProps> = ({
   );
 };
 
-async function getCalendars(setCalendarList: (list: Calendars) => void) {
+type SetCalendarStateFunction = (list: Calendars) => void;
+type SetPrimaryStateFunction = (primary: Calendar | null) => void;
+
+async function getCalendars(
+  setCalendarList: SetCalendarStateFunction,
+  setPrimaryCalendar: SetPrimaryStateFunction
+) {
   try {
     const res = await axios.get('/api/calendars', {
       withCredentials: true,
     });
 
-    const calendarList = res.data;
+    const { calendars, primary } = res.data;
 
+    const calendarList = calendars;
+
+    setPrimaryCalendar(primary);
     setCalendarList(calendarList);
   } catch (e) {
+    setPrimaryCalendar(null);
     setCalendarList([]);
   }
 }

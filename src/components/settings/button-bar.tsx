@@ -15,6 +15,7 @@ import { MeetingLengthButton } from './meeting-length-button';
 import { Done, Edit, Google } from '@mui/icons-material';
 import theme from '../../theme';
 import { useAuth } from '../auth-provider';
+import { TimeRangeButton } from './time-range-button';
 
 function NoWrap({ children }: PropsWithChildren<{}>) {
   return (
@@ -83,11 +84,7 @@ export function ButtonBar() {
                   <br />
                 ) : (
                   ''
-                )}between{' '}
-                <SettingsButton id='time-range' label={'10:00am and 6:00pm'}>
-                  <div />
-                </SettingsButton>
-                .
+                )}between <TimeRangeButton />.
               </Typography>
             </Box>
           </>

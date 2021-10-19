@@ -1,18 +1,21 @@
 import React, { ChangeEvent } from 'react';
-import { Checkbox, FormControlLabel } from '@mui/material';
+import { Checkbox, FormControlLabel, Typography } from '@mui/material';
 import { CalendarItem } from '../calendar';
 
 interface CalendarListCheckboxProps {
   calendar: CalendarItem;
   checked: boolean;
   onCheck: (e: ChangeEvent<HTMLInputElement>) => void;
+  isPrimary?: boolean;
 }
 
 export const CalendarListCheckbox = ({
+  isPrimary,
   calendar,
   onCheck,
   checked,
 }: CalendarListCheckboxProps) => {
+  console.log('calendar', calendar);
   const { summary, id } = calendar;
 
   const displayName =
@@ -28,7 +31,11 @@ export const CalendarListCheckbox = ({
       control={
         <Checkbox checked={checked} onChange={onCheck} name={id ?? undefined} />
       }
-      label={displayName?.toString() ?? 'No name'}
+      label={
+        <Typography sx={{ fontWeight: isPrimary ? '600' : '400' }}>
+          {displayName?.toString() ?? 'Unnamed Calendar'}
+        </Typography>
+      }
     />
   );
 };

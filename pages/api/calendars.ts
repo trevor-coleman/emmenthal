@@ -15,6 +15,10 @@ const calendars: NextApiHandler = async (req, res) => {
 
   const list = await calendar.calendarList.list();
 
+  const primaryRes = await calendar.calendars.get({ calendarId: 'primary' });
+
+  const { data: primary } = primaryRes;
+
   const {
     data: { items },
   } = list;
@@ -27,7 +31,10 @@ const calendars: NextApiHandler = async (req, res) => {
     });
   }
 
-  res.status(200).json(items);
+  res.status(200).json({
+    primary,
+    calendars: items,
+  });
 };
 
 export default calendars;
