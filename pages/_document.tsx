@@ -28,6 +28,7 @@ export default class MyDocument extends Document {
 // `getInitialProps` belongs to `_document` (instead of `_app`),
 // it's compatible with static-site generation (SSG).
 MyDocument.getInitialProps = async (ctx) => {
+  console.log('document.getInitalProps');
   // Resolution order
   //
   // On the server:
@@ -57,8 +58,9 @@ MyDocument.getInitialProps = async (ctx) => {
   const cache = createEmotionCache();
   const { extractCriticalToChunks } = createEmotionServer(cache);
 
-  ctx.renderPage = () =>
-    originalRenderPage({
+  ctx.renderPage = () => {
+    console.log('renderPage');
+    return originalRenderPage({
       enhanceApp(App: any) {
         const EnhancedApp = (props: any) => (
           <App emotionCache={cache} {...props} />
@@ -67,6 +69,7 @@ MyDocument.getInitialProps = async (ctx) => {
         return EnhancedApp;
       },
     });
+  };
 
   const initialProps = await Document.getInitialProps(ctx);
   // This is important. It prevents emotion to render invalid HTML.
@@ -80,6 +83,15 @@ MyDocument.getInitialProps = async (ctx) => {
       dangerouslySetInnerHTML={{ __html: style.css }}
     />
   ));
+
+  console.log({
+    ...initialProps,
+    // Styles fragment is rendered after the app and page rendering finish.
+    styles: [
+      ...React.Children.toArray(initialProps.styles),
+      ...emotionStyleTags,
+    ],
+  });
 
   return {
     ...initialProps,

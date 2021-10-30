@@ -14,8 +14,10 @@ export function authenticate(
 }> {
   const auth = getAuth();
   let tokenString: string | null;
+  console.log('authenticating');
 
   return new Promise((resolve) => {
+    console.log('starting authenticate Promise');
     let tokenString: string;
     if (!req || !res) return resolve({ auth, authenticated: false });
     if ('cookies' in req) {
@@ -34,12 +36,12 @@ export function authenticate(
     }
 
     try {
+      console.log('setting authenticate credentials');
       auth.setCredentials(token);
       return resolve({ auth, authenticated: true, token });
     } catch (e) {
+      console.log(e);
       return resolve({ auth, authenticated: false });
-    } finally {
-      return { auth: null, authenticated: false };
     }
   });
 }

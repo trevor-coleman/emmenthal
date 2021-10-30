@@ -54,10 +54,10 @@ const Home: NextPage = ({ authUrl, authenticated, user }: any) => {
 
 export default Home;
 
-export async function getServerSideProps(context: NextPageContext) {
+export async function getStaticProps(context: NextPageContext) {
   const { req, res } = context;
 
-  console.log('getting Home');
+  console.log('ggetServerSideProps');
 
   let user: oauth2_v2.Schema$Userinfo | undefined;
 
@@ -86,7 +86,7 @@ export async function getServerSideProps(context: NextPageContext) {
       };
     }
   }
-
+  console.log('returning index props');
   return {
     props: {
       authenticated,

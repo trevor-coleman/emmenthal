@@ -76,8 +76,12 @@ const blankContext: ICalendarContextData = {
 };
 
 function init(): ICalendarContextData {
+  console.log('initializing Calendar Context');
   // return blankContext;
-  if (typeof window === 'undefined') return blankContext;
+  if (typeof window === 'undefined') {
+    console.log('no window returning blankContext');
+    return blankContext;
+  }
 
   const storedContext = localStorage.getItem('contextValue');
 

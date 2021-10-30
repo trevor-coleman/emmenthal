@@ -12,7 +12,9 @@ import '../src/components/settings/button-bar.css';
 import { IAuthContext } from '../src/components/auth-provider';
 
 // Client-side cache, shared for the whole session of the user in the browser.
+console.log('creating Emotion Cache');
 const clientSideEmotionCache = createEmotionCache();
+console.log('finished creating Emotion Cache');
 
 interface MyAppProps extends AppProps {
   emotionCache?: EmotionCache;
@@ -20,12 +22,8 @@ interface MyAppProps extends AppProps {
 }
 
 export default function MyApp(props: MyAppProps) {
-  const {
-    Component,
-    emotionCache = clientSideEmotionCache,
-    pageProps,
-    authContext,
-  } = props;
+  console.log('My App');
+  const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <CacheProvider value={emotionCache}>

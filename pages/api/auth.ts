@@ -5,6 +5,7 @@ import { google, oauth2_v2 } from 'googleapis';
 import { getAuthUrl } from '../../src/api-calls/google-auth';
 
 export default async function auth(req: NextApiRequest, res: NextApiResponse) {
+  console.log('auth');
   const { auth, authenticated, token } = await authenticate(req, res);
 
   let user: oauth2_v2.Schema$Userinfo | undefined;
