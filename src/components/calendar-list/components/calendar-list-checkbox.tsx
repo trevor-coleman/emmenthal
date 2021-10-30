@@ -15,7 +15,6 @@ export const CalendarListCheckbox = ({
   onCheck,
   checked,
 }: CalendarListCheckboxProps) => {
-  console.log('calendar', calendar);
   const { summary, id } = calendar;
 
   const displayName =

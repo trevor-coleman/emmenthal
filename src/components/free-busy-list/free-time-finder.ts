@@ -1,7 +1,4 @@
-import {
-  FreeBusyData,
-  ICalendarOptions,
-} from '../components/calendar-provider';
+import { FreeBusyData, ICalendarOptions } from '../calendar-provider';
 import {
   isBefore,
   isEqual,
@@ -14,17 +11,21 @@ import {
   getMinutes,
   max,
   add,
+  getTime,
+  clamp,
 } from 'date-fns';
 
 export function findFreeTime(
   freeBusyData: FreeBusyData,
   selectedCalendars: string[],
-  { time: timeOptions, date: { days: weekdays } }: ICalendarOptions
+  { time: timeOptions, date: { days: daysOfWeek } }: ICalendarOptions
 ): Interval[] {
   const range: Interval = {
-    start: timeOptions?.start ?? set(new Date(), { hours: 10, minutes: 0 }),
-    end: timeOptions?.end ?? set(new Date(), { hours: 10, minutes: 0 }),
+    start: timeOptions?.start ?? set(new Date(), { hours: 9, minutes: 0 }),
+    end: timeOptions?.end ?? set(new Date(), { hours: 17, minutes: 0 }),
   };
+
+  console.log('Range', range);
 
   const { duration } = timeOptions;
 
@@ -44,7 +45,7 @@ export function findFreeTime(
     return isBefore(a.start, b.end) ? -1 : 1;
   });
 
-  let busy = queue.shift()!;
+  let busy: Interval | undefined = queue.shift();
   if (!busy) return [];
 
   function setTime(timeA: Date | number, timeB: Date | number) {
@@ -56,55 +57,65 @@ export function findFreeTime(
 
   function getDayRange(interval: Interval) {
     return {
-      start: setTime(interval.end, range.start),
-      end: setTime(interval.end, range.end),
+      start: setTime(interval.start, range.start),
+      end: setTime(interval.start, range.end),
     };
   }
 
   let day = getDayRange(busy);
 
-  let free: Interval = { start: day.start, end: day.start };
+  let current: Interval = { start: day.start, end: day.start };
 
   const freeTimes: Interval[] = [];
 
   while (busy) {
     let { start, end } = busy;
+    console.log('busy', busy);
 
     //If event crosses midnight split (at midnight) into two events
     if (getDay(start) !== getDay(end)) {
+      console.log('crosses midnight');
       queue.unshift({ start: startOfDay(end), end });
       end = endOfDay(start);
     }
 
     //If next event is on a different day, reset day
-    if (getDay(free.end) !== getDay(start)) {
+    if (getDay(current.end) !== getDay(start)) {
+      console.log('next day');
       day = getDayRange(busy);
-      free.start = setTime(start, range.start);
-      free.end = free.start;
+      current.start = setTime(start, range.start);
+      current.end = current.start;
     }
 
-    if (!weekdays[getDay(start)]) {
-      busy = queue.shift()!;
+    if (!daysOfWeek[getDay(start)]) {
+      console.log('not on selected day');
+      busy = queue.shift();
       continue;
     }
 
-    if (start <= max([free.end, add(free.start, duration)])) {
-      if (end <= free.end) {
-        busy = queue.shift()!;
+    start = clamp(start, day);
+    end = clamp(end, day);
+
+    if (start <= max([current.end, add(current.start, duration)])) {
+      console.log('starts during current');
+      if (end <= current.end) {
+        console.log('ends before current ends');
+        busy = queue.shift();
         continue;
       }
-      free.end = end;
-      busy = queue.shift()!;
+      console.log('ends after current ends');
+      current.end = end;
+      busy = queue.shift();
       continue;
     }
-
+    console.log('ending current and starting new');
     freeTimes.push({
-      start: free.end,
+      start: current.end,
       end: start,
     });
-    free.end = end;
 
-    busy = queue.shift()!;
+    current.end = end;
+    busy = queue.shift();
   }
 
   return freeTimes;

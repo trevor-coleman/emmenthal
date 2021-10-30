@@ -43,6 +43,7 @@ export function TimeRange() {
               value={time.end}
               minutesStep={5}
               onChange={(newValue) => {
+                console.log(newValue);
                 setOptions({
                   ...options,
                   time: {
