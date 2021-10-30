@@ -56,6 +56,9 @@ export default Home;
 
 export async function getServerSideProps(context: NextPageContext) {
   const { req, res } = context;
+
+  console.log('getting Home');
+
   let user: oauth2_v2.Schema$Userinfo | undefined;
 
   const { auth, authenticated, token } = await authenticate(req, res);
@@ -72,7 +75,16 @@ export async function getServerSideProps(context: NextPageContext) {
       const userRes = await google.oauth2('v2').userinfo.get({});
       console.log('userRes:', userRes);
       user = userRes?.data;
-    } catch {}
+    } catch (e) {
+      console.log(e);
+      return {
+        props: {
+          authenticated,
+          authUrl: getAuthUrl(),
+          user: user ?? null,
+        },
+      };
+    }
   }
 
   return {

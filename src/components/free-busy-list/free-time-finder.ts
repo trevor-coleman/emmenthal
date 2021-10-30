@@ -70,25 +70,21 @@ export function findFreeTime(
 
   while (busy) {
     let { start, end } = busy;
-    console.log('busy', busy);
 
     //If event crosses midnight split (at midnight) into two events
     if (getDay(start) !== getDay(end)) {
-      console.log('crosses midnight');
       queue.unshift({ start: startOfDay(end), end });
       end = endOfDay(start);
     }
 
     //If next event is on a different day, reset day
     if (getDay(current.end) !== getDay(start)) {
-      console.log('next day');
       day = getDayRange(busy);
       current.start = setTime(start, range.start);
       current.end = current.start;
     }
 
     if (!daysOfWeek[getDay(start)]) {
-      console.log('not on selected day');
       busy = queue.shift();
       continue;
     }
@@ -97,18 +93,14 @@ export function findFreeTime(
     end = clamp(end, day);
 
     if (start <= max([current.end, add(current.start, duration)])) {
-      console.log('starts during current');
       if (end <= current.end) {
-        console.log('ends before current ends');
         busy = queue.shift();
         continue;
       }
-      console.log('ends after current ends');
       current.end = end;
       busy = queue.shift();
       continue;
     }
-    console.log('ending current and starting new');
     freeTimes.push({
       start: current.end,
       end: start,
